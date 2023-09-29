@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-
 class OpenAIGenerator:
     ''' create a class that uses gpt-3.5-turbo to follow the prompt in the variable inside the prompt.py: prompt.
     Then you should get those variables as a CSV by getting what's after "input" and "output" and then you should
@@ -30,7 +29,7 @@ class OpenAIGenerator:
                 },
             ],
             temperature=0.3,
-            max_tokens=3000,
+            max_tokens=2000,
         )
 
         # say if the response is ready
@@ -49,9 +48,9 @@ class OpenAIGenerator:
                 for data in responseToJson:
                     # write the data to the file
                     try:
-                        file.write(f"{data['instruction'].replace(',', '')},{data['input'].replace(',', '')},{data['output'].replace(',', '')}\n")
+                        file.write(f"{data['instruction'].replace(',', '')},{data['input'].replace(',', '')},{json.dumps(data['output']).replace(',', ';')}\n")
                     except:
-                        pass
+                        print("err")
         except:
             pass
 
@@ -61,7 +60,7 @@ if __name__ == "__main__":
     # create a class
     generator = OpenAIGenerator()
     # get the model
-    for i in range(100):
+    for i in range(3):
         print(f"iteration {i}")
         generator.model()
         generator.generate_csv()

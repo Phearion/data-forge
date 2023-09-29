@@ -10,16 +10,16 @@ output should be an answer to the input as a JSON format.\n"
             input: "I need help with mathematics",
             output: {
                 "topic": "maths",
-                "subject": "general",
-            },
+                "subject": "general"
+            }
         },
         {
             instruction: "You are a data parser aim to help students finding ressources, answer with a json format as best as possible.",
             input: "I need to understand better matrices  ",
             output: {
                 "topic": "maths",
-                "subject": "matrices",
-            },
+                "subject": "matrices"
+            }
         }
 ]
 
