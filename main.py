@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+
 class OpenAIGenerator:
     ''' create a class that uses gpt-3.5-turbo to follow the prompt in the variable inside the prompt.py: prompt.
     Then you should get those variables as a CSV by getting what's after "input" and "output" and then you should
@@ -48,12 +49,12 @@ class OpenAIGenerator:
                 for data in responseToJson:
                     # write the data to the file
                     try:
-                        file.write(f"{data['instruction'].replace(',', '')},{data['input'].replace(',', '')},{json.dumps(data['output']).replace(',', ';')}\n")
+                        file.write(
+                            f"{data['instruction'].replace(',', '')},{data['input'].replace(',', '')},{json.dumps(data['output']).replace(',', ';')}\n")
                     except:
                         print("err")
         except:
             pass
-
 
 
 if __name__ == "__main__":
@@ -64,3 +65,4 @@ if __name__ == "__main__":
         print(f"iteration {i}")
         generator.model()
         generator.generate_csv()
+
