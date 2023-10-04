@@ -33,7 +33,7 @@ class OpenAIGenerator:
                     "content": self.prompt,
                 },
             ],
-            temperature=0.5,
+            temperature=0.3,
             max_tokens=2000,
         )
 
@@ -45,6 +45,7 @@ class OpenAIGenerator:
         Generate a csv file from the response.
         """
         response = self.response["choices"][0]["message"]["content"]
+
         try:
             response_to_json = json.loads(response)
             with open(f"llama_{subject}_dataset.csv", "a", encoding="utf-8") as file:
@@ -74,8 +75,5 @@ if __name__ == "__main__":
     for key in generator.config["themes_dict"].keys():
         print(f"subject: {key}")
         generator.prompt = prompt.get_prompt(subject=key)
-
-        for i in range(generator.config["nb_iterations"]):
-            print(f"iteration {i + 1}")
-            generator.model()
-            generator.generate_csv(subject=key)
+        generator.model()
+        generator.generate_csv(subject=key)

@@ -1,6 +1,5 @@
 {
-  "nb_iterations": 1,
-  "nb_observations": 10,
+  "nb_observations": 5,
 
   "themes_dict": {
     "Maths": ["Matrices", "systemResolution"],
