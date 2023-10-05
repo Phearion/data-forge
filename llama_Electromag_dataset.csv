@@ -1,0 +1,6 @@
+instruction,input,output
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources répond au mieux en format JSON.,Pouvez-vous m'aider à comprendre la loi d'Ampère ?,{"subject": "Electromag"; "topic": "Ampere"}
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources répond au mieux en format JSON.,J'ai des difficultés avec la distribution de charge électrique pouvez-vous me donner des conseils ?,{"subject": "Electromag"; "topic": "loadDistribution"}
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources répond au mieux en format JSON.,Je suis bloqué sur la loi d'Ampère pouvez-vous me donner des exemples d'application ?,{"subject": "Electromag"; "topic": "Ampere"}
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources répond au mieux en format JSON.,Avez-vous des conseils pour comprendre la distribution de charge électrique ?,{"subject": "Electromag"; "topic": "loadDistribution"}
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources répond au mieux en format JSON.,Pouvez-vous m'aider à améliorer ma compréhension de la loi d'Ampère ?,{"subject": "Electromag"; "topic": "Ampere"}

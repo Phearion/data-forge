@@ -1,0 +1,8 @@
+{
+  "nb_observations": 5,
+
+  "themes_dict": {
+    "Maths": ["Matrices", "systemResolution"],
+    "Electromag": ["Ampere", "loadDistribution"]
+    }
+}
