@@ -33,7 +33,7 @@ def get_prompt(subject):
     "Algèbre", tu dois construire des demandes sur les concepts mathématiques en algèbre, et ainsi de suite.
     NE SOIS PAS général dans les demandes.\n
     La sortie doit être une réponse à l'entrée sous forme de format JSON.\n".
-    \nDonne-moi un format JSON qui est un tableau de EXACTEMENT %s lignes (instructions, entrées, sorties) de cette
+    \nDonne-moi un format JSON qui est un tableau de EXACTEMENT 10 lignes (instructions, entrées, sorties) de cette
      manière :"
     [
              {
@@ -65,5 +65,4 @@ def get_prompt(subject):
            config["themes_dict"],
            subject,
            config["themes_dict"][subject],
-           config["nb_observations"],
            config["themes_dict"])
