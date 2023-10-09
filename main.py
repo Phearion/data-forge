@@ -63,6 +63,7 @@ class OpenAIGenerator:
                         )
                     except KeyError:
                         pass
+
         except json.decoder.JSONDecodeError as e:
             print("JSONDecodeError")
             print(e)
@@ -74,6 +75,9 @@ if __name__ == "__main__":
     # get the model
     for key in generator.config["themes_dict"].keys():
         print(f"subject: {key}")
-        generator.prompt = prompt.get_prompt(subject=key)
-        generator.model()
-        generator.generate_csv(subject=key)
+
+        for i in range(generator.config["nb_iterations"]):  # 10 responses per iteration
+            print(f"iteration: {i + 1}")
+            generator.prompt = prompt.get_prompt(subject=key)
+            generator.model()
+            generator.generate_csv(subject=key)
