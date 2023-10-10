@@ -2,6 +2,7 @@ import json
 import os
 import openai
 from dotenv import load_dotenv
+from duplicates_verification import DuplicatesVerification
 import prompt
 
 load_dotenv()
@@ -16,8 +17,8 @@ class OpenAIGenerator:
 
     def __init__(self):
         # Set the API key
-        with open("DataForgeConfig.json", "r", encoding="utf-8") as file:
-            self.config = json.load(file)
+        with open("DataForgeConfig.json", "r", encoding="utf-8") as f:
+            self.config = json.load(f)
         self.prompt = prompt
         self.response = None
 
@@ -37,9 +38,6 @@ class OpenAIGenerator:
             max_tokens=2000,
         )
 
-        # say if the response is ready
-        print("response ready")
-
     def generate_csv(self, subject):
         """
         Generate a csv file from the response.
@@ -48,15 +46,15 @@ class OpenAIGenerator:
 
         try:
             response_to_json = json.loads(response)
-            with open(f"llama_{subject}_dataset.csv", "a", encoding="utf-8") as file:
+            with open(f"llama-{subject}-dataset.csv", "a", encoding="utf-8") as f:
                 # if file is not empty don't write the header
-                if os.stat(f"llama_{subject}_dataset.csv").st_size == 0:
-                    file.write("instruction,input,output\n")
+                if os.stat(f"llama-{subject}-dataset.csv").st_size == 0:
+                    f.write("instruction,input,output\n")
 
                 for data in response_to_json:
                     # write the data to the file
                     try:
-                        file.write(
+                        f.write(
                             f"{data['instruction'].replace(',', '')},"
                             f"{data['input'].replace(',', '')},"
                             f"{json.dumps(data['output']).replace(',', ';')}\n"
@@ -68,16 +66,26 @@ class OpenAIGenerator:
             print("JSONDecodeError")
             print(e)
 
+    def generate_dataset(self, nb_iterations):
+        # get the model
+        for key in self.config['themes_dict'].keys():
+            print(f"subject: {key}")
+
+            for i in range(nb_iterations):
+                self.prompt = prompt.get_prompt(subject=key)
+                self.model()
+                self.generate_csv(subject=key)
+                print(f"generated {(i + 1) * 5} responses")
+
 
 if __name__ == "__main__":
-    # create a class
     generator = OpenAIGenerator()
-    # get the model
-    for key in generator.config["themes_dict"].keys():
-        print(f"subject: {key}")
+    # generate dataset
+    generator.generate_dataset(generator.config['nb_iterations'])
 
-        for i in range(generator.config["nb_iterations"]):  # 10 responses per iteration
-            print(f"iteration: {i + 1}")
-            generator.prompt = prompt.get_prompt(subject=key)
-            generator.model()
-            generator.generate_csv(subject=key)
+    # verify duplicates in csv files
+    print('\n')
+    for file in os.listdir():
+        if file.endswith('.csv'):
+            duplicates = DuplicatesVerification(file=file)
+            duplicates.verify_duplicates()
