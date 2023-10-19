@@ -1,13 +1,11 @@
 import json
 
-with open("DataForgeConfig.json", "r", encoding="utf-8") as file:
+with open("dataforge-config.json", "r", encoding="utf-8") as file:
     config = json.load(file)
-
 
 def get_prompt(subject):
     return '''
-    Tu es un professeur spécialisé en %s. Tu as les connaissances à propos de tous les concepts et thèmatiques de cette
-    matière.
+    Tu es un professeur spécialisé en %s. Tu as les connaissances à propos de tous les concepts et thèmatiques de cette matière.
     Agis en tant qu'analyseur de données avec ces 3 éléments : "instructions, entrée et sortie\n"
     L'instruction sera toujours la même : "Tu es un analyseur de données chargé d'aider les étudiants à trouver des
     ressources, répond au mieux en format JSON."\n
@@ -29,7 +27,7 @@ def get_prompt(subject):
     Pourriez-vous me donner des conseils sur"\n
     Les demandes DOIVENT UNIQUEMENT porter sur la matière en question et les thèmatiques qui la concerne. C'est très
     important !!"\n
-    Tu DOIS construire les demandes en fonction du degré de généralité. Par exemple, si le thèmatique est
+    Tu DOIS construire les demandes en fonction du degré de généralité. Par exemple, si la thématique est
     "Algèbre", tu dois construire des demandes sur les concepts mathématiques en algèbre, et ainsi de suite.
     NE SOIS PAS général dans les demandes.\n
     La sortie doit être une réponse à l'entrée sous forme de format JSON.\n".
@@ -53,7 +51,18 @@ def get_prompt(subject):
                     "subject": "Maths",
                     "topic": "Matrices"
                 }
-            }
+            },
+            {
+               instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                               répond au mieux en format JSON.",
+               input: "C'est quoi la loi d'Ampère",
+               output: {
+                   "subject": "Electromag",
+                   "topic": "Ampere"
+               }
+           }
+
+
     ]
     \n
     'subject' et 'topic' DOIVENT être les MEMES que ceux écrits dans le dictionnaire %s.\n
