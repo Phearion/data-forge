@@ -17,7 +17,7 @@ class OpenAIGenerator:
 
     def __init__(self):
         # Set the API key
-        with open("DataForgeConfig.json", "r", encoding="utf-8") as f:
+        with open("dataforge-config.json", "r", encoding="utf-8") as f:
             self.config = json.load(f)
         self.prompt = prompt
         self.response = None
