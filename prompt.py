@@ -89,7 +89,141 @@ def get_prompt(subject):
                     "topic": "loadDistribution"
                 }
 },
-
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Quand t'en cordonné polaire pour former un cylindre faut bien faire une rotation de 2pi nan ?",
+                output: {
+                    "subject": "Electromag",
+                    "topic": "Ampere"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Quelqu'un sait faire Gausse ?",
+                output: {
+                    "subject": "Electromag",
+                    "topic": "Gauss"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "on est d'accord que pour un file infinie, l'expression du champ électrostatique c'est ça",
+                output: {
+                    "subject": "Electromag",
+                    "topic": "Ampere"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Sur les nb complexes, pour calculer l’argument d’un nb réel et imaginaire pur, après avoir mis l’angle, on met [pi] ou [2pi]? Ex:  arg(2i)=pi/2 [pi] ou [2pi] ? Il me semble plus logique que se soit [2pi] mais je ne sais pas pourquoi,",
+                output: {
+                    "subject": "Maths",
+                    "topic": "ComplexeNumbers"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Comment une fonction peut être injective et surjective en même temps sachant qu'une fonction injective associe (en très gros c'est ce que j'ai compris) un y à un x au max et qu'une surjective peut associer plusieurs y à un x ? Toute injective est surjective ?",
+                output: {
+                    "subject": "Maths",
+                    "topic": "Functions"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Comment on résout un système ?"
+                output: {
+                    "subject": "Maths",
+                    "topic": "SystemResolution"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Salut, je bloque sur une question en maths. Est-ce que quelqu’un pourrait m’aider svp. J’ai posé u(x)=(3x-7)^4 et v(x)=racine de 4x-3. Et après j’ai dérivé avec la formule uv=u’v+uv’ mais j’aboutis a quelque de bizarre."
+                output: {
+                    "subject": "Maths",
+                    "topic": "Derivatives"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "On est d'accord que (ln(kx))' avec k une constante ça donne k/x ?"
+                output: {
+                    "subject": "Maths",
+                    "topic": "Derivatives"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "La négation de = c'est "différent" ?"
+                output: {
+                    "subject": "Maths",
+                    "topic": "Logic"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Si une fonction est continue elle est forcément surjective ?"
+                output: {
+                    "subject": "Maths",
+                    "topic": "Functions"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Du coup pour trouver un produit téléscopique, on doit définir une suite?"
+                output: {
+                    "subject": "Maths",
+                    "topic": "Series"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "tu connais la formule de pascal?"
+                output: {
+                    "subject": "Maths",
+                    "topic": "Analysis"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Est ce possible que la derivée soit negative et que la fonction soit croissante?"
+                output: {
+                    "subject": "Maths",
+                    "topic": "Functions"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Pendant que l'on y est, c'est quoi le domaine de dérivabilité de arcsin(x) et de arctan(x) ?"
+                output: {
+                    "subject": "Maths",
+                    "topic": "Functions"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Pourquoi arcsin(cos(x)) est dérivable sur ]0,pi[ alors que arccos(cos(x)) sur ]-1,0[U]0,1[ ?"
+                output: {
+                    "subject": "Maths",
+                    "topic": "Functions"
+                }
+},
 
 
     ]
