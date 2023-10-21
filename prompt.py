@@ -3,6 +3,7 @@ import json
 with open("dataforge-config.json", "r", encoding="utf-8") as file:
     config = json.load(file)
 
+print(config)
 def get_prompt(subject):
     return '''
     Tu es un professeur spécialisé en %s. Tu as les connaissances à propos de tous les concepts et thèmatiques de cette matière.
@@ -34,7 +35,7 @@ def get_prompt(subject):
     \nDonne-moi un format JSON qui est un tableau comportant CINQ lignes (instructions, entrées, sorties) de cette
      manière :"
     [
-             {
+{
                 instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
                                 répond au mieux en format JSON.",
                 input: "J'ai besoin d'aide en mathématiques",
@@ -42,8 +43,8 @@ def get_prompt(subject):
                     "subject": "Maths",
                     "topic": "General"
                 }
-            },
-            {
+},
+{
                 instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
                                 répond au mieux en format JSON.",
                 input: "J'ai besoin de mieux comprendre les matrices.",
@@ -51,8 +52,8 @@ def get_prompt(subject):
                     "subject": "Maths",
                     "topic": "Matrices"
                 }
-            },
-            {
+},
+{
                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
                                répond au mieux en format JSON.",
                input: "C'est quoi la loi d'Ampère",
@@ -60,7 +61,35 @@ def get_prompt(subject):
                    "subject": "Electromag",
                    "topic": "Ampere"
                }
-           }
+},
+{
+               instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                               répond au mieux en format JSON.",
+               input: "Est ce qu une âme charitable pourrait juste m explique la méthode pour déterminer la direction des lignes de champs électriques",
+               output: {
+                   "subject": "Electromag",
+                   "topic": "Ampere"
+                }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                  répond au mieux en format JSON.",
+                input: "pour ce cas la prof nouq dit qui a une charge linéique mais c pas plutot une charge surfacique?"
+                output: {
+                    "subject": "Electromag",
+                    "topic": "loadDistribution"
+                  }
+},
+{
+                instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
+                                répond au mieux en format JSON.",
+                input: "Quelqu’un est chaud en electromag ? Je comprends pas pourquoi quand z>e/2 on a un cylindre de hauteur e dans la zone chargée",
+                output: {
+                    "subject": "Electromag",
+                    "topic": "loadDistribution"
+                }
+},
+
 
 
     ]
