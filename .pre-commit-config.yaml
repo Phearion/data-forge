@@ -25,3 +25,11 @@ repos:
           "."
         ]
 
+    - id: commit-linter
+      name: commit-linter
+      entry: commit-linter
+      language: system
+      types: [python]
+
+
+
