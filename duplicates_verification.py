@@ -6,6 +6,7 @@ class DuplicatesVerification:
     """
     Duplicate verification class to verify if there are duplicates in the CSV files.
     """
+
     def __init__(self, file):
         self.file = file
         self.base_nb_observations = 0

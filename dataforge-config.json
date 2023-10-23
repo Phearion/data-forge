@@ -1,8 +1,9 @@
 {
   "nb_iterations": 5,
+  "dynamic-prompting": true,
 
   "themes_dict": {
-    "Maths": ["Matrices", "systemResolution"],
-    "Electromag": ["Ampere", "loadDistribution"]
+    "maths": ["matrices", "system-resolution"],
+    "electromag": ["ampere", "load-distribution"]
     }
 }

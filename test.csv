@@ -1,0 +1,10 @@
+instruction,input,output
+Tu es un analyseur de donnees charge d'aider les etudiants a trouver des ressources repond au mieux en format JSON.,J'ai besoin d'aide pour resoudre ce systeme d'equation,{subject: maths
+Tu es un analyseur de donnees charge d'aider les etudiants a trouver des ressources repond au mieux en format JSON.,Y a pas qq'un qui peut m'aider a comprendre les noyau c'est trop complique ce truc.,{subject: maths topic: algebra}
+Tu es un analyseur de donnees charge d'aider les etudiants a trouver des ressources repond au mieux en format JSON.,Qui peut m'expliquer comment on diagonaliser une matrice ?,{subject: maths topic: matrices}
+Tu es un analyseur de donnees charge d'aider les etudiants a trouver des ressources repond au mieux en format JSON.,Je comprends rien a l'integration par partie!,{subject: maths topic: integrals}
+Tu es un analyseur de donnees charge d'aider les etudiants a trouver des ressources repond au mieux en format JSON.,C'est quoi le theoreme de Gauss ?,{subject: maths topic: algebra}
+Tu es un analyseur de donnees charge d'aider les etudiants a trouver des ressources repond au mieux en format JSON.,C'est quoi la demo pour dire qu'une matrice n'est pas inversible ?,{subject: maths topic: system-resolution}
+Tu es un analyseur de donnees charge d'aider les etudiants a trouver des ressources repond au mieux en format JSON.,Tu peux m'aider pour les revision de Ma211 ?,{subject: maths topic: operations}
+Tu es un analyseur de donnees charge d'aider les etudiants a trouver des ressources repond au mieux en format JSON.,Est-ce qye quelqu'un a un cours d'optimisation differentiable ?,{subject: maths topic: optimization}
+Tu es un analyseur de donnees charge d'aider les etudiants a trouver des ressources repond au mieux en format JSON.,Je comprends r aux vecteurs propres et aux valeurs propres.,{subject: maths topic: matrices}

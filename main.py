@@ -3,7 +3,7 @@ import os
 import openai
 from dotenv import load_dotenv
 from duplicates_verification import DuplicatesVerification
-import prompt
+from prompt import Prompt
 
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -19,10 +19,10 @@ class OpenAIGenerator:
         # Set the API key
         with open("dataforge-config.json", "r", encoding="utf-8") as f:
             self.config = json.load(f)
-        self.prompt = prompt
+        self.prompt = Prompt()
         self.response = None
 
-    def model(self):
+    def model(self, prompt_content):
         """
         Generate a response from the prompt.
         """
@@ -31,7 +31,7 @@ class OpenAIGenerator:
             messages=[
                 {
                     "role": "user",
-                    "content": self.prompt,
+                    "content": prompt_content,
                 },
             ],
             temperature=0.3,
@@ -67,13 +67,17 @@ class OpenAIGenerator:
             print(e)
 
     def generate_dataset(self, nb_iterations):
+        """
+        Generate a dataset from the prompt.
+        """
         # get the model
         for key in self.config['themes_dict'].keys():
             print(f"subject: {key}")
 
             for i in range(nb_iterations):
-                self.prompt = prompt.get_prompt(subject=key)
-                self.model()
+                print(f"iteration: {i + 1}")
+                dyn_prompt = self.prompt.get_prompt(f="test.csv", subject=key)
+                self.model(prompt_content=dyn_prompt)
                 self.generate_csv(subject=key)
                 print(f"generated {(i + 1) * 5} responses")
 
