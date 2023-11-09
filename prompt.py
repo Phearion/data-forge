@@ -18,16 +18,23 @@ class Prompt:
         """
         examples = []
 
-        df = pd.read_csv(f, encoding="utf-8")
-        for _ in range(3):
+        df = pd.read_csv(f, encoding="cp1252", delimiter=';')
+
+        for _ in range(self.config["dynamic-prompting-examples"]):
             rand_num = random.randint(1, df.shape[0] - 1)
             examples.append('''{
-                            instruction: "%s",
+                            instruction: "Tu es un analyseur de données charge d'aider les étudiants à trouver des
+                            ressources répond au mieux en format JSON.",
                             input: "%s",
-                            output: %s
-                        }''' % (df.iloc[rand_num]["instruction"],
-                                df.iloc[rand_num]["input"],
-                                df.iloc[rand_num]["output"]))
+                            output: {subject: "%s", topic: "%s"},
+                            text: '%s -> {subject: "%s", topic: "%s"}'
+                        }''' % (df.iloc[rand_num]["Question"],
+                                df.iloc[rand_num]["Subject"],
+                                df.iloc[rand_num]["Topic"],
+                                df.iloc[rand_num]["Question"],
+                                df.iloc[rand_num]["Subject"],
+                                df.iloc[rand_num]["Topic"])
+                            )
 
         return examples
 
@@ -44,7 +51,8 @@ class Prompt:
                     output: {
                         "subject": "maths",
                         "topic": "general"
-                    }
+                    },
+                    text: "J'ai besoin d'aide en mathématiques" -> {subject: "maths", topic: "general"}
                 },
                 {
                     instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
@@ -53,7 +61,8 @@ class Prompt:
                     output: {
                         "subject": "maths",
                         "topic": "matrices"
-                    }
+                    },
+                    text: "J'ai besoin de mieux comprendre les matrices." -> {subject: "maths", topic: "matrices"}
                 },
                 {
                    instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
@@ -62,7 +71,8 @@ class Prompt:
                    output: {
                        "subject": "electromag",
                        "topic": "ampere"
-                   }
+                   },
+                   text: "C'est quoi la loi d'Ampère" -> {subject: "electromag", topic: "ampere"}
                }
         ]'''
 
@@ -104,8 +114,3 @@ class Prompt:
         comment le format JSON doit être construit.\n
         IMPORTANT : NE DONNE PAS le même exemple deux fois, il doit être unique.
         '''
-
-
-if __name__ == "__main__":
-    prompt = Prompt()
-    print(prompt.get_prompt("test.csv", "maths"))

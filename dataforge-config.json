@@ -1,9 +1,11 @@
 {
-  "nb_iterations": 5,
+  "first-step-iterations": 1,
+  "second-step-iterations": 5,
   "dynamic-prompting": true,
+  "dynamic-prompting-examples": 2,
 
   "themes_dict": {
-    "maths": ["matrices", "system-resolution"],
-    "electromag": ["ampere", "load-distribution"]
+    "maths": ["complex-numbers", "derivatives", "differentials"],
+    "physics": ["harmonic-oscillators", "coordinates"]
     }
 }

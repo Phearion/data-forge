@@ -34,7 +34,7 @@ class OpenAIGenerator:
                     "content": prompt_content,
                 },
             ],
-            temperature=0.3,
+            temperature=0.5,
             max_tokens=2000,
         )
 
@@ -46,10 +46,10 @@ class OpenAIGenerator:
 
         try:
             response_to_json = json.loads(response)
-            with open(f"llama-{subject}-dataset.csv", "a", encoding="utf-8") as f:
+            with open(f"llama-{subject}-dataset.csv", "a", encoding="cp1252") as f:
                 # if file is not empty don't write the header
                 if os.stat(f"llama-{subject}-dataset.csv").st_size == 0:
-                    f.write("instruction,input,output\n")
+                    f.write("instruction,input,output,text\n")
 
                 for data in response_to_json:
                     # write the data to the file
@@ -57,7 +57,8 @@ class OpenAIGenerator:
                         f.write(
                             f"{data['instruction'].replace(',', '')},"
                             f"{data['input'].replace(',', '')},"
-                            f"{json.dumps(data['output']).replace(',', ';')}\n"
+                            f"{json.dumps(data['output']).replace(',', ';')},"
+                            f"{data['text'].replace(',', '')}\n"
                         )
                     except KeyError:
                         pass
@@ -76,7 +77,7 @@ class OpenAIGenerator:
 
             for i in range(nb_iterations):
                 print(f"iteration: {i + 1}")
-                dyn_prompt = self.prompt.get_prompt(f="test.csv", subject=key)
+                dyn_prompt = self.prompt.get_prompt(f=f"manual-questions-{key}.csv", subject=key)
                 self.model(prompt_content=dyn_prompt)
                 self.generate_csv(subject=key)
                 print(f"generated {(i + 1) * 5} responses")
@@ -85,7 +86,12 @@ class OpenAIGenerator:
 if __name__ == "__main__":
     generator = OpenAIGenerator()
     # generate dataset
-    generator.generate_dataset(generator.config['nb_iterations'])
+    generator.generate_dataset(generator.config['first-step-iterations'])
+    # generator.generate_dataset(generator.config['second-step-iterations'])
+
+    # add manual questions
+    # generator.add_manual_questions("manual-questions-maths.csv", "llama-maths-dataset.csv")
+    # generator.add_manual_questions("manual-questions-physics.csv", "llama-physics-dataset.csv")
 
     # verify duplicates in csv files
     print('\n')
