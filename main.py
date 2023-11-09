@@ -1,6 +1,9 @@
 import json
 import os
+import sys
+
 import openai
+import pandas as pd
 from dotenv import load_dotenv
 from duplicates_verification import DuplicatesVerification
 from prompt import Prompt
@@ -38,7 +41,7 @@ class OpenAIGenerator:
             max_tokens=2000,
         )
 
-    def generate_csv(self, subject):
+    def write_csv(self, subject):
         """
         Generate a csv file from the response.
         """
@@ -78,18 +81,50 @@ class OpenAIGenerator:
                 print(f"iteration: {i + 1}")
                 dyn_prompt = self.prompt.get_prompt(f="test.csv", subject=key)
                 self.model(prompt_content=dyn_prompt)
-                self.generate_csv(subject=key)
+                self.write_csv(subject=key)
                 print(f"generated {(i + 1) * 5} responses")
+
+    def combine_datasets(self):
+        """
+        Combine all datasets into one.
+        """
+        found = False
+        # you should have header like other csv: instruction,input,output only one time
+        # create hader in the first file
+        with open('bigbrain-dataset.csv', 'w', encoding="utf-8") as f:
+            f.write("instruction,input,output\n")
+
+        for f in os.listdir():
+            if f.endswith('.csv'):
+                found = True
+                df = pd.read_csv(f, encoding="utf-8")
+                df.to_csv('bigbrain-dataset.csv', mode='a', header=False, index=False)
+                print(f"Combined {f} into bigbrain-dataset.csv")
+
+        if not found:
+            return print("No csv file found")
+        return print("Done combining datasets")
 
 
 if __name__ == "__main__":
     generator = OpenAIGenerator()
-    # generate dataset
-    generator.generate_dataset(generator.config['nb_iterations'])
+    args = sys.argv[1:]
+    list_args = ['--generate', '--combine', '--no-duplicates']
 
-    # verify duplicates in csv files
-    print('\n')
-    for file in os.listdir():
-        if file.endswith('.csv'):
-            duplicates = DuplicatesVerification(file=file)
-            duplicates.verify_duplicates()
+    if '--generate' in args:
+        generator.generate_dataset(generator.config['nb_iterations'])
+
+    if '--combine' in args:
+        generator.combine_datasets()
+
+    if '--no-duplicates' in args:
+        for file in os.listdir():
+            if file.endswith('.csv'):
+                duplicates = DuplicatesVerification(file=file)
+                duplicates.verify_duplicates()
+
+    if not args or not set(args).issubset(set(list_args)) or args == '--help':
+        print("Please use: "
+              "\n--generate to generate a dataset"
+              "\n--combine to combine all datasets into one"
+              "\n--no-duplicate to verify duplicates in the csv files")
