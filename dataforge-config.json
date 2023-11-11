@@ -1,6 +1,6 @@
 {
-  "first-step-iterations": 1,
-  "second-step-iterations": 5,
+  "first-step-iterations": 20,
+  "second-step-iterations": 480,
   "dynamic-prompting": true,
   "dynamic-prompting-examples": 2,
 

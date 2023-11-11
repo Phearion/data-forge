@@ -12,7 +12,7 @@ class Prompt:
         with open("dataforge-config.json", "r", encoding="utf-8") as file:
             self.config = json.load(file)
 
-    def dynamic_prompt(self, f):
+    def dynamic_prompt(self, f, identifier):
         """
         Select 3 random examples from the CSV file.
         """
@@ -22,23 +22,29 @@ class Prompt:
 
         for _ in range(self.config["dynamic-prompting-examples"]):
             rand_num = random.randint(1, df.shape[0] - 1)
-            examples.append('''{
-                            instruction: "Tu es un analyseur de données charge d'aider les étudiants à trouver des
-                            ressources répond au mieux en format JSON.",
-                            input: "%s",
-                            output: {subject: "%s", topic: "%s"},
-                            text: '%s -> {subject: "%s", topic: "%s"}'
-                        }''' % (df.iloc[rand_num]["Question"],
-                                df.iloc[rand_num]["Subject"],
-                                df.iloc[rand_num]["Topic"],
-                                df.iloc[rand_num]["Question"],
-                                df.iloc[rand_num]["Subject"],
-                                df.iloc[rand_num]["Topic"])
-                            )
+            if identifier == 1:
+                examples.append('''{
+                                instruction: "Tu es un analyseur de données charge d'aider les étudiants à trouver des
+                                ressources répond au mieux en format JSON.";
+                                input: "%s";
+                                output: {subject: "%s", topic: "%s"}\n;
+                            }''' % (df.iloc[rand_num]["Question"],
+                                    df.iloc[rand_num]["Subject"],
+                                    df.iloc[rand_num]["Topic"])
+                                )
+            if identifier == 2:
+                examples.append('''{
+                                instruction: "Tu es un analyseur de données charge d'aider les étudiants à trouver des
+                                ressources répond au mieux en format JSON.";
+                                input: "%s";
+                                output: %s\n;
+                            }''' % (df.iloc[rand_num]["input"],
+                                    df.iloc[rand_num]["output"])
+                                )
 
         return examples
 
-    def get_prompt(self, f, subject):
+    def get_prompt(self, f, subject, identifier):
         """
         Generate a prompt to be given to GPT.
         """
@@ -46,39 +52,36 @@ class Prompt:
             examples = '''[
                  {
                     instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
-                                    répond au mieux en format JSON.",
-                    input: "J'ai besoin d'aide en mathématiques",
+                                    répond au mieux en format JSON.";
+                    input: "J'ai besoin d'aide en mathématiques";
                     output: {
                         "subject": "maths",
                         "topic": "general"
-                    },
-                    text: "J'ai besoin d'aide en mathématiques" -> {subject: "maths", topic: "general"}
+                    };
                 },
                 {
                     instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
-                                    répond au mieux en format JSON.",
-                    input: "J'ai besoin de mieux comprendre les matrices.",
+                                    répond au mieux en format JSON.";
+                    input: "J'ai besoin de mieux comprendre les matrices.";
                     output: {
                         "subject": "maths",
                         "topic": "matrices"
-                    },
-                    text: "J'ai besoin de mieux comprendre les matrices." -> {subject: "maths", topic: "matrices"}
+                    };
                 },
                 {
                    instruction: "Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources,
-                                   répond au mieux en format JSON.",
-                   input: "C'est quoi la loi d'Ampère",
+                                   répond au mieux en format JSON.";
+                   input: "C'est quoi la loi d'Ampère";
                    output: {
                        "subject": "electromag",
                        "topic": "ampere"
-                   },
-                   text: "C'est quoi la loi d'Ampère" -> {subject: "electromag", topic: "ampere"}
+                   };
                }
         ]'''
 
         else:
             examples = "[\n"
-            for ex in self.dynamic_prompt(f):
+            for ex in self.dynamic_prompt(f, identifier):
                 examples += f"\t\t\t{ex}"
                 examples += ",\n"
             examples += "\t\t]"
