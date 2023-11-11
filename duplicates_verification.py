@@ -1,4 +1,3 @@
-import csv
 import pandas as pd
 
 
@@ -6,6 +5,7 @@ class DuplicatesVerification:
     """
     Duplicate verification class to verify if there are duplicates in the CSV files.
     """
+
     def __init__(self, file):
         self.file = file
         self.base_nb_observations = 0
@@ -15,7 +15,7 @@ class DuplicatesVerification:
         """
         Verify if there are duplicates in the CSV files.
         """
-        df = pd.read_csv(self.file, encoding="utf-8")
+        df = pd.read_csv(self.file, encoding="cp1252", delimiter=";")
         self.base_nb_observations = df.shape[0]
 
         # check for duplicates in the input column
@@ -28,6 +28,6 @@ class DuplicatesVerification:
             df.drop_duplicates(subset=["input"], keep="first", inplace=True)
 
             # save the dataframe to a new csv file
-            df.to_csv(self.file, index=False, encoding="utf-8", quoting=csv.QUOTE_NONE)
+            df.to_csv(self.file, index=False, encoding="cp1252", sep=";")
             self.nb_duplicates = self.base_nb_observations - df.shape[0]
             print(f"{self.file}: {self.nb_duplicates} duplicates removed")
