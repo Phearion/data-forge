@@ -1,0 +1,6 @@
+instruction;input;output;text
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources, répond au mieux en format JSON.;Comment fonctionne un oscillateur harmonique?;{"subject": "physics", "topic": "harmonic-oscillators"}
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources, répond au mieux en format JSON.;Qu'est-ce que la coordonnée cartésienne?;{"subject": "physics", "topic": "coordinates"}
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources, répond au mieux en format JSON.;Comment calculer la période d'un oscillateur harmonique?;{"subject": "physics", "topic": "harmonic-oscillators"}
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources, répond au mieux en format JSON.;Quelles sont les coordonnées polaires?;{"subject": "physics", "topic": "coordinates"}
+Tu es un analyseur de données chargé d'aider les étudiants à trouver des ressources, répond au mieux en format JSON.;Comment trouver l'amplitude d'un oscillateur harmonique?;{"subject": "physics", "topic": "harmonic-oscillators"}

@@ -2,7 +2,6 @@ import json
 import random
 import pandas as pd
 
-
 class Prompt:
     """
     Prompt class to generate prompts for GPT.
@@ -18,7 +17,7 @@ class Prompt:
         """
         examples = []
 
-        df = pd.read_csv(f, encoding="cp1252", delimiter=';')
+        df = pd.read_csv(f, delimiter=';')
 
         for _ in range(self.config["dynamic-prompting-examples"]):
             rand_num = random.randint(1, df.shape[0] - 1)
