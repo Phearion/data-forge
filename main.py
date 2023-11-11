@@ -188,7 +188,7 @@ if __name__ == "__main__":
     subject_list = generator.config["themes_dict"].keys()
 
     args = sys.argv[1:]
-    list_args = ["--first-generation", "--combine", "--no-duplicates", "--second-generation"]
+    list_args = ["--first-generation", "--second-generation", "--combine", "--no-duplicates"]
 
     if "--first-generation" not in args and "--second-generation" not in args:
         generator.pipeline(execution_list=args)
@@ -204,6 +204,8 @@ if __name__ == "__main__":
 
     if not args or not set(args).issubset(set(list_args)) or args == "--help":
         print("Please use: "
-              "\n--generate to generate a dataset"
+              "\n--first-generation to generate a dataset "
+              "from manual questions (gathered from students)"
+              "\n--second-generation to generate a dataset based on the first generation"
               "\n--combine to combine all datasets into one"
               "\n--no-duplicate to verify duplicates in the csv files")
