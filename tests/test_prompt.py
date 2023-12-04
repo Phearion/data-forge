@@ -37,7 +37,7 @@ class TestPrompt(unittest.TestCase):
 
         self.prompt = None
 
-    def test_prompt_dynamic_prompt_file1(self):
+    def test_dynamic_prompt(self):
         """
         Test case to check if dynamic prompt is generated
         """
@@ -45,15 +45,10 @@ class TestPrompt(unittest.TestCase):
         identifier = 1
         self.assertEqual(len(self.prompt.dynamic_prompt(self.file1, identifier)), 3)
 
-    def test_prompt_dynamic_prompt_file2(self):
-        """
-        Test case to check if dynamic prompt is generated
-        """
-
         identifier = 2
         self.assertEqual(len(self.prompt.dynamic_prompt(self.file2, identifier)), 3)
 
-    def test_prompt_get_prompt_file1(self):
+    def test_get_prompt(self):
         """
         Test case to check if prompt is a string
         """
@@ -62,23 +57,6 @@ class TestPrompt(unittest.TestCase):
         identifier = 1
         self.assertEqual(type(self.prompt.get_prompt(self.file1, subject, identifier)), str)
 
-    def test_prompt_get_prompt_file2(self):
-        """
-        Test case to check if prompt is a string
-        """
-
-        subject = "maths"
-        identifier = 2
-        self.assertEqual(type(self.prompt.get_prompt(self.file2, subject, identifier)), str)
-
-    def test2_prompt_get_prompt_file1(self):
-        """
-        Test case to check if prompt has the dynamic prompt
-        """
-
-        subject = "maths"
-        identifier = 1
-
         self.assertTrue(
             re.search('instruction:', self.prompt.get_prompt(self.file1, subject, identifier)))
         self.assertTrue(
@@ -86,13 +64,8 @@ class TestPrompt(unittest.TestCase):
         self.assertTrue(
             re.search('output:', self.prompt.get_prompt(self.file1, subject, identifier)))
 
-    def test2_prompt_get_prompt_file2(self):
-        """
-        Test case to check if prompt has the dynamic prompt
-        """
-
-        subject = "maths"
         identifier = 2
+        self.assertEqual(type(self.prompt.get_prompt(self.file2, subject, identifier)), str)
 
         self.assertTrue(
             re.search('instruction:', self.prompt.get_prompt(self.file2, subject, identifier)))
